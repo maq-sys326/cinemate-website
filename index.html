@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CineMate — Your movie universe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand" href="#" onclick="navigate('discover');return false"><span class="brand-mark">C</span><span>Cine<span class="brand-light">Mate</span><small>YOUR MOVIE UNIVERSE</small></span></a>
+    <div class="side-label">MENU</div>
+    <nav>
+      <button class="nav-item active" data-page="discover"><span>⌂</span> Discover</button>
+      <button class="nav-item" data-page="bookings"><span>▣</span> My bookings</button>
+      <button class="nav-item" data-page="diary"><span>▤</span> Watch diary</button>
+      <button class="nav-item" data-page="watchlist"><span>♡</span> Watchlist</button>
+      <button class="nav-item" data-page="stats"><span>▥</span> Your stats</button>
+    </nav>
+    <div class="sidebar-bottom"><div class="help-card"><div class="help-icon">✦</div><b>Your next movie night?</b><p>Discover something you'll love.</p><button onclick="navigate('discover')">Explore films <span>→</span></button></div>
+      <div class="profile"><div class="avatar">AM</div><div><b>Alex Morgan</b><small>Movie enthusiast</small></div><span class="more">•••</span></div>
+    </div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div class="crumb">CINEMATE <span>/</span> <b id="crumb-current">DISCOVER</b></div>
+      <div class="top-actions"><div class="search-wrap"><span>⌕</span><input id="global-search" placeholder="Search movies, genres..." autocomplete="off"></div><button class="icon-btn" title="Notifications">♧<i></i></button><div class="avatar small">AM</div></div>
+    </header>
+    <section id="page-discover" class="page active">
+      <div class="welcome-row"><div><div class="eyebrow"><span class="live-dot"></span> YOUR PERSONAL CINEMA</div><h1>Find your next <em>favourite.</em></h1><p class="muted">A world of stories, picked just for you.</p></div><div class="date-chip">✦ &nbsp; YOUR MOVIE SPACE</div></div>
+      <div class="hero-banner"><div class="hero-content"><span class="pill">EDITOR'S PICK · SCI-FI</span><h2>Stories that<br>stay with you.</h2><p>From unforgettable journeys to hidden gems.<br>Your next great watch starts here.</p><button class="primary-btn" onclick="scrollToSection('recommended')">Explore recommendations <span>↗</span></button></div><div class="hero-art"><div class="orbit orbit1"></div><div class="orbit orbit2"></div><div class="planet"></div><div class="hero-caption">THE UNIVERSE<br>IS YOURS TO EXPLORE</div></div></div>
+      <div class="section-heading" id="recommended"><div><div class="eyebrow">MADE FOR YOUR TASTE</div><h2>Recommended for you <span class="spark">✦</span></h2><p class="muted">A little help finding something extraordinary.</p></div><button class="text-btn" onclick="loadRecommendations()">Refresh picks ↗</button></div>
+      <div id="recommendations" class="movie-grid"></div>
+      <div class="section-heading browse-head"><div><div class="eyebrow">THE COLLECTION</div><h2>Now showing</h2><p class="muted">Find a story worth your evening.</p></div><div class="filters"><button class="filter active" data-filter="All">All films</button><button class="filter" data-filter="Action">Action</button><button class="filter" data-filter="Sci-Fi">Sci-Fi</button><button class="filter" data-filter="Drama">Drama</button></div></div>
+      <div id="all-movies" class="movie-grid"></div>
+    </section>
+    <section id="page-bookings" class="page"><div class="page-title"><div class="eyebrow">YOUR CINEMA PLANS</div><h1>My bookings</h1><p class="muted">Every great movie night starts with a seat.</p></div><div id="bookings-list" class="content-list"></div></section>
+    <section id="page-diary" class="page"><div class="page-title"><div class="eyebrow">A LIFE IN FILM</div><h1>Your watch diary</h1><p class="muted">Every film leaves a little something behind.</p></div><div class="diary-toolbar"><div id="diary-stats" class="mini-stat"></div><button class="primary-btn" onclick="openDiaryModal()">＋ Log a film</button></div><div id="diary-list" class="diary-grid"></div></section>
+    <section id="page-watchlist" class="page"><div class="page-title"><div class="eyebrow">FOR ANOTHER DAY</div><h1>Your watchlist</h1><p class="muted">All the stories you're saving for later.</p></div><div id="watchlist-list" class="movie-grid"></div></section>
+    <section id="page-stats" class="page"><div class="page-title"><div class="eyebrow">YOUR YEAR IN FILM</div><h1>Viewing insights</h1><p class="muted">A little snapshot of your movie personality.</p></div><div id="stats-panel" class="stats-grid"></div><div class="panel"><h3>Your favourite genres</h3><div id="genre-bars"></div></div></section>
+  </main>
+</div>
+
+<div id="modal" class="modal"><div class="modal-backdrop" onclick="closeModal()"></div><div class="modal-card"><button class="close-btn" onclick="closeModal()">×</button><div id="modal-content"></div></div></div>
+<div id="toast" class="toast"></div>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body></html>
